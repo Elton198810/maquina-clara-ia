@@ -3,6 +3,7 @@ import cors from "cors";
 import helmet from "helmet";
 import { rateLimit } from "express-rate-limit";
 import pg from "pg";
+import {initKiwifyDb,kiwifyRouter} from "./kiwify.mjs";
 import { createHmac, timingSafeEqual, randomUUID } from "node:crypto";
 
 const { Pool } = pg;
@@ -19,7 +20,8 @@ const pool = process.env.DATABASE_URL
 app.set("trust proxy", 1);
 app.use(helmet());
 app.use(cors({ origin: SITE_URL, methods: ["GET", "POST"], allowedHeaders: ["Content-Type"] }));
-app.use(express.json({ limit: "32kb" }));
+app.use(express.json({ limit: "128kb", verify: (req,_res,buf)=>{req.rawBody=Buffer.from(buf);} }));
+app.use("/api/kiwify",kiwifyRouter(pool));
 
 const checkoutLimiter = rateLimit({ windowMs: 15 * 60 * 1000, limit: 8, standardHeaders: "draft-8", legacyHeaders: false });
 const statusLimiter = rateLimit({ windowMs: 15 * 60 * 1000, limit: 40, standardHeaders: "draft-8", legacyHeaders: false });
@@ -150,7 +152,7 @@ app.use((err, _req, res, _next) => {
   res.status(400).json({ error: "Requisição inválida." });
 });
 
-initDb().then(() => {
+Promise.all([initDb(),initKiwifyDb(pool)]).then(() => {
   app.listen(PORT, "0.0.0.0", () => console.log(`Máquina Clara API ouvindo na porta ${PORT}`));
 }).catch(error => {
   console.error("Não foi possível inicializar o banco:", error.message);
