@@ -30,6 +30,11 @@ export function kiwifyRouter(pool,env=process.env) {
  const enabled=()=>configured()&&env.PAYMENTS_ENABLED==="true";
  router.use((_req,res,next)=>{res.set("Cache-Control","no-store");next();});
  router.get("/config",(_req,res)=>res.json({configured:configured(),enabled:enabled(),amount:19.90,currency:"BRL",productId:PRODUCT_ID}));
+ router.get("/connection",apiLimit,async(_req,res)=>{
+  if(!configured())return res.status(503).json({ready:false});
+  try{const result=await pool.query("SELECT verified_at FROM kiwify_diagnostics WHERE id=1");return res.json({ready:true,verifiedAt:result.rows[0]?.verified_at||null});}
+  catch{return res.status(503).json({ready:false});}
+ });
  router.post("/checkout",apiLimit,async(req,res)=>{
   if(!enabled())return res.status(503).json({error:"As vendas ainda estão em preparação. A demonstração é gratuita."});
   const email=req.body?.email;
