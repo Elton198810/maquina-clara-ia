@@ -30,6 +30,22 @@
 .value-bottom span{display:block;color:var(--muted);font-size:12px;margin-top:3px}
 .value-bottom .btn{white-space:nowrap}
 @media(max-width:700px){.pain-grid{grid-template-columns:1fr}.value-banner{padding:22px}.value-bottom{align-items:flex-start}}
+
+/* Preço de lançamento e transparência comercial */
+.pricing{padding:8px 0 76px}
+.price-card{max-width:880px;margin:0 auto;border:1px solid #435a6e;border-radius:22px;background:linear-gradient(135deg,#14283a,#0b1723);padding:clamp(22px,4vw,38px);display:grid;grid-template-columns:1.2fr .8fr;gap:26px;align-items:center}
+.price-eyebrow{font-size:11px;font-weight:800;letter-spacing:1.5px;color:var(--green);text-transform:uppercase}
+.price-card h2{font:800 clamp(25px,3vw,34px)/1.12 Manrope;letter-spacing:-.8px;margin:10px 0}
+.price-card p{color:#b8c7d2;font-size:14px}
+.price-points{display:grid;gap:9px;margin:18px 0 0;padding:0;list-style:none}
+.price-points li{font-size:13px;color:#d5e0e7}
+.price-points li:before{content:"✓";color:var(--green);font-weight:900;margin-right:9px}
+.price-side{background:#07131f;border:1px solid #34495b;border-radius:17px;padding:23px;text-align:center}
+.price-label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1px}
+.price-number{font:800 clamp(36px,5vw,48px)/1.1 Manrope;color:var(--green);margin:8px 0}
+.price-note{font-size:11px!important;color:#9eafbc!important}
+.price-side .btn{width:100%;justify-content:center;margin-top:8px}
+@media(max-width:700px){.price-card{grid-template-columns:1fr}.price-side{text-align:left}.price-side .btn{justify-content:center}}
 </style>
 </head>
 <body>
@@ -62,7 +78,30 @@
 <div class="field"><label for="seller">Informações do vendedor / descrição do anúncio</label><textarea id="seller" placeholder="Cole aqui a descrição, condições informadas, histórico declarado..."></textarea></div>
 <div class="field"><label for="photos">Fotos do equipamento (opcional)</label><div class="upload"><input id="photos" type="file" accept="image/*" multiple><p>Selecione fotos da máquina, plaqueta, motor, pneus/esteiras e possíveis danos. As imagens são usadas apenas nesta sessão do navegador.</p><div class="preview" id="preview"></div></div></div>
 <div class="field"><label for="docs">Documentos disponíveis</label><select id="docs"><option value="Não informado">Ainda não verifiquei</option><option value="Nota fiscal e documentação">Nota fiscal e documentação</option><option value="Manual e histórico de manutenção">Manual e histórico de manutenção</option><option value="Nota fiscal, manual e histórico">Nota fiscal, manual e histórico</option><option value="Nenhum documento apresentado">Nenhum documento apresentado</option></select></div>
-<div class="note">🔒 Nesta versão, os dados ficam no seu navegador e não são enviados a um servidor. Não inclua CPF, dados bancários ou documentos pessoais sensíveis.</div>
+<div class="note">🔒 Nesta versão, os dados ficam no seu 
+<section class="wrap pricing" id="precos" aria-labelledby="pricing-title">
+ <div class="price-card">
+  <div>
+   <div class="price-eyebrow">PREÇO DE LANÇAMENTO PLANEJADO</div>
+   <h2 id="pricing-title">Mais organização antes de assumir uma compra grande.</h2>
+   <p>Estamos preparando o dossiê digital avulso por um preço simples, pensado para quem está avaliando uma máquina usada.</p>
+   <ul class="price-points">
+    <li>Cadastro organizado da máquina e do anúncio</li>
+    <li>Pendências para esclarecer com o vendedor</li>
+    <li>Checklist específico para orientar a vistoria</li>
+    <li>Relatório preliminar para imprimir ou salvar em PDF</li>
+   </ul>
+  </div>
+  <div class="price-side">
+   <div class="price-label">Preço planejado por dossiê</div>
+   <div class="price-number">R$ 19,90</div>
+   <p class="price-note">Valor de lançamento previsto. A contratação e o pagamento ainda não estão habilitados.</p>
+   <a class="btn primary" href="#avaliar">Experimentar demonstração grátis →</a>
+   <p class="price-note">Você pode testar a versão demonstrativa sem pagar.</p>
+  </div>
+ </div>
+</section>
+navegador e não são enviados a um servidor. Não inclua CPF, dados bancários ou documentos pessoais sensíveis.</div>
 <button class="btn primary" style="width:100%" type="submit">Gerar meu dossiê preliminar →</button>
 </form></div>
 <div class="panel"><h3>2. Resultado da análise</h3><p class="sub">Seu relatório será montado a partir dos dados preenchidos.</p><div id="empty" class="result-empty"><div class="big">▤</div><b>Seu dossiê aparecerá aqui</b><p>Preencha os dados ao lado e clique em “Gerar meu dossiê”.</p></div><div class="report" id="report"></div></div></div>
@@ -96,7 +135,7 @@ $("machineForm").addEventListener("submit",e=>{
  "Torno":["Confira barramento, guias, folgas, eixo-árvore, placa, avanço e precisão.","Teste comandos, motor, segurança, alimentação elétrica e acessórios incluídos."]
  };
  const cautions=[...(specificChecks[d.kind]||["Confira estrutura, componentes de trabalho, comandos e itens de desgaste próprios do equipamento.","Verifique vazamentos, ruídos, vibração, folgas e reparos estruturais aparentes."]),...commonChecks];
- const score=Math.max(20,Math.min(95,92-gaps.length*10-photoUrls.length*2));
+ const score=Math.max(0,Math.min(100,100-gaps.length*12));
  const money=d.price?("R$ "+Number(d.price.replace(/\./g,"").replace(",",".")).toLocaleString("pt-BR",{minimumFractionDigits:2,maximumFractionDigits:2})):"Não informado";
  const title=[d.brand,d.model].filter(Boolean).join(" ")||d.kind;
  const summary=gaps.length===0?"Os principais campos do cadastro foram preenchidos. Isso não significa que o equipamento esteja aprovado ou livre de riscos.":"Há informações importantes ausentes. Trate este anúncio como pendente de confirmação até obter evidências e realizar inspeção.";
