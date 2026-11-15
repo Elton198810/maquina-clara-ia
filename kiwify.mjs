@@ -26,7 +26,7 @@ export function kiwifyRouter(pool,env=process.env) {
  const router=Router();
  const apiLimit=rateLimit({windowMs:15*60*1000,limit:80,standardHeaders:"draft-8",legacyHeaders:false});
  const recoveryLimit=rateLimit({windowMs:60*60*1000,limit:10,standardHeaders:"draft-8",legacyHeaders:false});
- const configured=()=>Boolean(pool&&env.KIWIFY_WEBHOOK_TOKEN?.length>=32&&env.ORDER_HASH_SECRET?.length>=32);
+ const configured=()=>Boolean(pool&&env.KIWIFY_WEBHOOK_TOKEN?.length>=10&&env.ORDER_HASH_SECRET?.length>=32);
  const enabled=()=>configured()&&env.PAYMENTS_ENABLED==="true";
  router.use((_req,res,next)=>{res.set("Cache-Control","no-store");next();});
  router.get("/config",(_req,res)=>res.json({configured:configured(),enabled:enabled(),amount:19.90,currency:"BRL",productId:PRODUCT_ID}));
