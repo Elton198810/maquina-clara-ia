@@ -8,7 +8,7 @@ export const makeToken = () => randomBytes(32).toString("base64url");
 export const emailKey = (email,secret) => createHmac("sha256",secret).update(email.trim().toLowerCase()).digest("hex");
 export const validEmail = email => typeof email==="string" && email.length<=254 && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim());
 export function verifySignature(raw,signature,secret) {
- if(!secret || secret.length<32 || !Buffer.isBuffer(raw) || !/^[a-f0-9]{40}$/.test(signature||"")) return false;
+ if(!secret || secret.length<10 || !Buffer.isBuffer(raw) || !/^[a-f0-9]{40}$/.test(signature||"")) return false;
  const expected=createHmac("sha1",secret).update(raw).digest();
  return timingSafeEqual(expected,Buffer.from(signature,"hex"));
 }
