@@ -96,10 +96,15 @@ html{scroll-padding-top:24px}
 @media(max-width:520px){.brand{font-size:14px;gap:8px}.brand small{font-size:8px;letter-spacing:1px}.mark{width:32px;height:32px;border-radius:10px}.nav{gap:8px}.navright{gap:6px}.navright .btn{padding:9px 10px!important;font-size:11px!important}.hero{gap:24px}.hero h1{font-size:39px;line-height:1.08}.hero-card{padding:17px}.tractor-art{height:220px}.quick-head{flex-direction:column;gap:12px}.section{padding:34px 0}.price-card{padding:21px;gap:18px}.price-side{padding:19px}.reportactions .btn{flex:1 1 145px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.btn:hover{transform:none}}
 @media print{.quick-start,.pricing{display:none!important}}
+
+.purchase-consent,.paid-check{display:flex;gap:10px;align-items:flex-start;font-size:13px;margin:15px 0}.purchase-consent input,.paid-check input{width:18px;height:18px;flex:none;accent-color:var(--green)}
+#paidReport h3{font:800 26px Manrope;margin:10px 0}#paidReport h4{font:700 17px Manrope;margin:24px 0 10px}#paidReport ul{padding-left:22px;color:#c5d1db}#paidReport li{margin:9px 0}.btn:disabled{cursor:not-allowed;opacity:.55;transform:none}
+[hidden]{display:none!important}
+@media print{#acesso{display:none!important}body.paid-print main>*:not(#acesso){display:none!important}body.paid-print #acesso{display:block!important}body.paid-print #acesso>*:not(#paidReport){display:none!important}body.paid-print #paidReport{display:block!important;color:#111}body.paid-print #printPaid{display:none!important}body.paid-print #paidReport ul{color:#222}}
 </style>
 </head>
 <body>
-<header class="wrap nav"><div class="brand"><div class="mark">M</div><div>máquina clara<small>análise inteligente de máquinas</small></div></div><div class="navright"><a class="btn secondary help-nav" href="#ajuda" style="padding:10px 12px;font-size:12px">Ajuda</a><span class="pill"><span class="status-dot" aria-hidden="true"></span> DEMONSTRAÇÃO GRATUITA</span><a href="#avaliar" class="btn primary" style="padding:10px 15px;font-size:12px">Criar dossiê ↗</a></div></header>
+<header class="wrap nav"><div class="brand"><div class="mark">M</div><div>máquina clara<small>análise inteligente de máquinas</small></div></div><div class="navright"><a class="btn secondary help-nav" href="#ajuda" style="padding:10px 12px;font-size:12px">Ajuda</a><span class="pill"><span class="status-dot" aria-hidden="true"></span> EXEMPLO DISPONÍVEL</span><a href="#avaliar" class="btn primary" style="padding:10px 15px;font-size:12px">Criar dossiê ↗</a></div></header>
 <main>
 <section class="wrap hero"><div><div class="eyebrow">DECISÃO MAIS INFORMADA. MENOS SURPRESAS.</div><h1>Antes de comprar uma máquina, <span>enxergue além do anúncio.</span></h1><p>Organize dados, fotos e documentos em um dossiê preliminar. Saiba o que perguntar sobre motor, hidráulico, horímetro e documentação antes de negociar.</p><div class="actions"><a class="btn primary" href="#avaliar">Analisar uma máquina <span>→</span></a><a class="btn secondary" href="#como-funciona">Como funciona</a></div><p class="disclaimer" style="margin-top:20px">Ferramenta de organização e triagem. Não substitui vistoria mecânica, perícia, consulta documental oficial ou avaliação profissional.</p></div>
 <div class="hero-card"><div class="mocktop"><span>EXEMPLO DE EQUIPAMENTO</span><span>MODELO VISUAL</span></div><div class="tractor-art"><img src="https://images.unsplash.com/photo-1666011865321-20bc7e358121?auto=format&amp;fit=crop&amp;fm=jpg&amp;ixid=NHwxMjA3fDA%3D&amp;ixlib=rb-4.1.0&amp;q=60&amp;w=1400" alt="Trator New Holland real trabalhando em um campo agrícola" loading="eager"></div><div class="mocktitle">Trator New Holland em campo</div><div class="mocksub">Fotografia ilustrativa · imagem de referência, não representa o equipamento anunciado</div><div class="mockstats"><div class="stat"><b>01</b><small>IDENTIFICAÇÃO</small></div><div class="stat"><b>02</b><small>DOCUMENTOS</small></div><div class="stat"><b>03</b><small>INSPEÇÃO</small></div></div><div class="check"><i class="dot good"></i> Marca, modelo e ano</div><div class="check"><i class="dot"></i> Histórico de manutenção</div><div class="check"><i class="dot"></i> Número de série e plaqueta</div><div class="check"><i class="dot good"></i> Fotos e documentos</div></div></section>
@@ -125,7 +130,7 @@ html{scroll-padding-top:24px}
  <article><span class="step-no">03</span><div><h3>Leve para a vistoria</h3><p>Use o checklist com um profissional e salve o resultado em PDF.</p></div></article>
  </div>
 </section>
-<section class="wrap section" id="avaliar"><div class="sectionhead"><div class="eyebrow">COMECE SEM PAGAR</div><h2>Da informação solta a um roteiro claro.</h2><p>Preencha o que souber. O dossiê organiza os dados e destaca o que ainda precisa ser conferido.</p></div>
+<section class="wrap section" id="avaliar"><div class="sectionhead"><div class="eyebrow">PREENCHA OS DADOS DA SUA MÁQUINA</div><h2>Da informação solta a um roteiro claro.</h2><p>Preencha o que souber. Seu dossiê será liberado após a confirmação do pagamento de R$ 19,90.</p></div>
 <div class="workspace"><div class="panel formpanel"><h3>1. Dados do equipamento</h3><p class="sub">Preencha com os dados do anúncio. Só o tipo de equipamento é obrigatório.</p>
 <button class="btn secondary demo-button" id="demoFill" type="button" style="width:100%;margin:0 0 16px">▶ Ver exemplo preenchido (demonstração)</button>
 <form id="machineForm">
@@ -138,9 +143,9 @@ html{scroll-padding-top:24px}
 <div class="field"><label for="photos">Fotos do equipamento (opcional)</label><div class="upload"><input id="photos" type="file" accept="image/*" multiple><p>Selecione fotos da máquina, plaqueta, motor, pneus/esteiras e possíveis danos. As imagens são usadas apenas nesta sessão do navegador.</p><div class="preview" id="preview"></div></div></div>
 <div class="field"><label for="docs">Documentos disponíveis</label><select id="docs"><option value="Não informado">Ainda não verifiquei</option><option value="Nota fiscal e documentação">Nota fiscal e documentação</option><option value="Manual e histórico de manutenção">Manual e histórico de manutenção</option><option value="Nota fiscal, manual e histórico">Nota fiscal, manual e histórico</option><option value="Nenhum documento apresentado">Nenhum documento apresentado</option></select></div>
 <div class="note">🔒 Nesta versão, os dados ficam no seu navegador e não são enviados a um servidor. Não inclua CPF, dados bancários ou documentos pessoais sensíveis.</div>
-<button class="btn primary" style="width:100%" type="submit">Gerar meu dossiê preliminar →</button>
+<button class="btn primary" style="width:100%" type="submit">Continuar para o pagamento →</button>
 </form></div>
-<div class="panel"><h3>2. Resultado da análise</h3><p class="sub">Seu relatório será montado a partir dos dados preenchidos.</p><div id="empty" class="result-empty"><div class="big">▤</div><b>Seu dossiê aparecerá aqui</b><p>Preencha os dados ao lado e clique em “Gerar meu dossiê”.</p></div><div class="report" id="report"></div></div></div>
+<div class="panel"><h3>2. Resultado da análise</h3><p class="sub">Veja um exemplo fictício abaixo. O dossiê da sua máquina é liberado após o pagamento.</p><div id="empty" class="result-empty"><div class="big">▤</div><b>Seu dossiê aparecerá aqui</b><p>Use “Ver exemplo preenchido” para conhecer a apresentação. Para analisar sua máquina, preencha os dados e continue para o pagamento.</p></div><div class="report" id="report"></div></div></div>
 </section>
 <section class="wrap section" id="como-funciona"><div class="sectionhead"><div class="eyebrow">SIMPLES E OBJETIVO</div><h2>Uma compra melhor começa com as perguntas certas.</h2></div><div class="features"><div class="feature"><div class="ico">📋</div><h3>Informações organizadas</h3><p>Reúna características, preço, localização, anúncio e documentos em um registro único.</p></div><div class="feature"><div class="ico">🔎</div><h3>Pontos de atenção</h3><p>Receba uma lista preliminar de verificações para orientar sua conversa com o vendedor e a vistoria.</p></div><div class="feature"><div class="ico">📄</div><h3>Dossiê imprimível</h3><p>Gere um documento organizado para compartilhar com um mecânico, avaliador ou parceiro.</p></div></div></section>
 
@@ -149,7 +154,7 @@ html{scroll-padding-top:24px}
   <div>
    <div class="price-eyebrow">PRÓXIMA ETAPA · DOSSIÊ AVULSO</div>
    <h2 id="pricing-title">Mais organização antes de assumir uma compra grande.</h2>
-   <p>Um preço por máquina analisada. Sem mensalidade. Enquanto preparamos a contratação, você pode conhecer a ferramenta gratuitamente.</p>
+   <p>Um preço por máquina analisada. Sem mensalidade. Enquanto preparamos a contratação, você pode visualizar um exemplo fictício.</p>
    <ul class="price-points">
     <li>Cadastro organizado da máquina e do anúncio</li>
     <li>Pendências para esclarecer com o vendedor</li>
@@ -161,23 +166,47 @@ html{scroll-padding-top:24px}
    <div class="price-label">Preço planejado por dossiê</div>
    <div class="price-number">R$ 19,90</div>
    <p class="price-note"><span class="coming-badge">EM PREPARAÇÃO</span><br>As vendas pelo site serão liberadas após os testes de pagamento e entrega.</p>
-   <a class="btn primary" href="#avaliar">Experimentar demonstração grátis →</a>
-   <p class="price-note">Você pode testar a versão demonstrativa sem pagar.</p>
+   <a class="btn primary" href="#avaliar">Ver exemplo fictício →</a>
+   <p class="price-note">Conheça a apresentação com um exemplo fictício.</p>
   </div>
  </div>
 </section>
+
+<section class="wrap section" id="acesso" aria-labelledby="accessTitle">
+ <div class="sectionhead"><div class="eyebrow">DOSSIÊ AVULSO · R$ 19,90</div><h2 id="accessTitle">Seu dossiê, vinculado à sua máquina.</h2><p>Além da demonstração, o dossiê avulso reúne perguntas ao vendedor, evidências a solicitar e um roteiro para a vistoria e a negociação. É gerado por regras com os dados declarados; não é laudo nem diagnóstico por IA.</p></div>
+ <div class="workspace access-forms"><div class="panel">
+ <h3>Preparar compra</h3><p class="sub">Preencha primeiro os dados do equipamento no formulário acima. Cada compra corresponde a um dossiê de uma máquina.</p>
+ <form id="purchaseForm" onsubmit="return false">
+ <div class="field"><label for="purchaseEmail">E-mail para identificar sua compra</label><input type="email" id="purchaseEmail" autocomplete="email" maxlength="254" required></div>
+ <label class="purchase-consent"><input type="checkbox" id="purchaseConsent" required><span>Autorizo guardar os dados deste equipamento para disponibilizar e recuperar meu dossiê. As fotos não são enviadas. Não incluirei dados pessoais sensíveis na descrição.</span></label>
+ <p class="sub" id="salesAvailability" aria-live="polite">Verificando disponibilidade...</p>
+ <button class="btn primary" type="button" id="buyDossier" disabled>Contratação em preparação</button>
+ </form>
+ </div><div class="panel">
+ <h3>Já comprei</h3><p class="sub">Após o pagamento, volte a esta página e clique em Atualizar acesso. Se trocou de navegador, recupere pelo número completo do pedido Kiwify e o e-mail da compra.</p>
+ <button class="btn secondary" type="button" id="refreshPurchase">Atualizar acesso</button>
+ <details style="margin-top:20px"><summary>Recuperar meu pedido</summary><form id="recoveryForm">
+ <div class="field"><label for="recoveryOrder">Número completo do pedido Kiwify</label><input id="recoveryOrder" required minlength="36" maxlength="36" placeholder="ID completo recebido na confirmação"></div>
+ <div class="field"><label for="recoveryEmail">E-mail usado na compra</label><input type="email" id="recoveryEmail" autocomplete="email" maxlength="254" required></div>
+ <button class="btn secondary" type="submit" id="recoverPurchase">Recuperar acesso</button></form></details>
+ </div></div>
+ <p class="note" id="purchaseMessage" role="status" aria-live="polite">Apenas a confirmação de pagamento libera o dossiê. Voltar do checkout não comprova a aprovação.</p>
+ <button class="btn primary" type="button" id="bindPurchase" hidden>Vincular a máquina preenchida a este pedido</button>
+ <div id="paidReport" class="panel" hidden style="margin-top:24px"></div>
+</section>
+
 <section class="wrap section" id="ajuda" aria-labelledby="help-title">
  <div class="sectionhead"><div class="eyebrow">RESOLVA AQUI NO SITE</div><h2 id="help-title">Central de ajuda Máquina Clara</h2><p>Encontre orientações para usar o dossiê, salvar o relatório e entender o pagamento.</p></div>
  <label for="helpSearch">Qual é sua dúvida?</label>
  <input class="help-search" id="helpSearch" type="search" placeholder="Busque por PDF, fotos, pagamento, acesso..." autocomplete="off">
  <p id="helpCount" class="sub" aria-live="polite"></p>
  <div class="help-grid" id="helpItems">
- <details class="help-item"><summary>Como gerar meu dossiê?</summary><p>Escolha o tipo de equipamento e preencha os dados que conhecer. Clique em “Gerar meu dossiê preliminar”. Para conhecer o resultado sem preencher, use “Ver exemplo preenchido”. Os dados desse exemplo são fictícios.</p><p><a href="#avaliar">Ir para o formulário</a></p></details>
+ <details class="help-item"><summary>Como gerar meu dossiê?</summary><p>Preencha os dados do equipamento e continue para o pagamento. Seu dossiê de R$ 19,90 será liberado após a confirmação. Para conhecer a apresentação, use “Ver exemplo preenchido”; esse exemplo contém somente dados fictícios.</p><p><a href="#avaliar">Ir para o formulário</a></p></details>
  <details class="help-item"><summary>Preciso preencher todos os campos?</summary><p>O tipo de equipamento é obrigatório. Os outros campos podem ficar em branco; o relatório indica o que falta confirmar. Mais informações preenchidas não comprovam a qualidade mecânica da máquina.</p></details>
- <details class="help-item"><summary>Como salvar em PDF ou imprimir?</summary><p>Gere o dossiê e clique em “Imprimir / salvar PDF” no resultado. Na janela do navegador, selecione “Salvar como PDF” ou sua impressora. Salve o arquivo antes de fechar ou atualizar a página.</p></details>
- <details class="help-item"><summary>As fotos e os dados ficam salvos?</summary><p>Nesta demonstração, os dados e as fotos são usados apenas na sessão do navegador. Não há armazenamento na sua conta nem recuperação automática após fechar ou atualizar a página. O relatório informa a quantidade de fotos; não faz diagnóstico visual das imagens.</p></details>
+ <details class="help-item"><summary>Como salvar em PDF ou imprimir?</summary><p>Depois da confirmação da compra, abra seu dossiê e clique em “Imprimir / salvar meu dossiê em PDF”. Na janela do navegador, selecione “Salvar como PDF” ou sua impressora. Salve o arquivo antes de fechar ou atualizar a página.</p></details>
+ <details class="help-item"><summary>As fotos e os dados ficam salvos?</summary><p>Antes da compra, o formulário e as fotos ficam na sessão do navegador. Ao preparar o pedido, os dados do equipamento são guardados com sua autorização para recuperar o dossiê. As fotos não são enviadas e não recebem diagnóstico visual. Após fechar a página, recupere a compra pelo número do pedido Kiwify e o e-mail usado na compra.</p></details>
  <details class="help-item"><summary>O relatório comprova o estado da máquina?</summary><p>Não. É uma organização preliminar dos dados declarados e um roteiro de verificações. Não autentica documentos, não consulta bases oficiais, não calcula valor de mercado e não substitui vistoria de um profissional.</p></details>
- <details class="help-item"><summary>Quanto custa? Já posso comprar?</summary><p>O valor previsto é R$ 19,90 por dossiê, em pagamento único. A demonstração continua gratuita. O checkout Kiwify está em configuração e a compra pelo site será disponibilizada após os testes de confirmação e entrega.</p></details>
+ <details class="help-item"><summary>Quanto custa? Já posso comprar?</summary><p>O valor previsto é R$ 19,90 por dossiê, em pagamento único. O exemplo fictício está disponível para conhecer a apresentação. O dossiê de uma máquina custa R$ 19,90 e exige confirmação do pagamento. As vendas serão liberadas após os testes de confirmação e entrega.</p></details>
  <details class="help-item"><summary>Paguei, mas ainda não recebi acesso. O que fazer?</summary><p>Confira se recebeu a confirmação de pagamento da Kiwify e verifique a pasta de spam. Gerar um Pix ou boleto não significa pagamento aprovado. A liberação automática da Máquina Clara ainda está em preparação; não faça uma nova compra para tentar liberar o mesmo pedido.</p><p>Para consultar orientações sobre a compra, acesse a <a href="https://ajuda.kiwify.com.br/" target="_blank" rel="noopener noreferrer">central oficial da Kiwify</a>.</p></details>
  <details class="help-item"><summary>Como solicitar reembolso de uma compra Kiwify?</summary><p>Use o portal oficial de reembolso e informe o e-mail utilizado na compra. A Kiwify informa as condições e os prazos aplicáveis ao seu pedido.</p><p><a href="https://reembolso.kiwify.com.br/" target="_blank" rel="noopener noreferrer">Abrir portal de reembolso da Kiwify</a> · <a href="https://ajuda.kiwify.com.br/pt-br/article/como-faco-para-pedir-o-reembolso-de-um-produto-que-comprei-1kfom3h/" target="_blank" rel="noopener noreferrer">Ver instruções oficiais</a></p></details>
  <details class="help-item"><summary>O botão de gerar não responde. Como resolver?</summary><p>Selecione o tipo de equipamento e confira se o link do anúncio começa com https:// ou deixe esse campo vazio. Use um navegador atualizado com JavaScript habilitado. Antes de atualizar a página, copie os dados preenchidos para não perdê-los.</p></details>
@@ -191,17 +220,24 @@ html{scroll-padding-top:24px}
 <script>
 const $=id=>document.getElementById(id);
 let photoUrls=[];
+let showingSample=false;
 $("yearNow").textContent=new Date().getFullYear();
 
 $("demoFill").addEventListener("click",()=>{
  const sample={kind:"Trator agrícola",brand:"New Holland",model:"TL75E (exemplo)",year:"2017",hours:"6.500 horas (informado no exemplo)",price:"145000",location:"Ribeirão Preto / SP (exemplo)",link:"",seller:"DEMONSTRAÇÃO: dados fictícios usados apenas para mostrar como o dossiê funciona. Confirme todas as informações com o vendedor e documentos originais.",docs:"Nota fiscal, manual e histórico"};
  Object.entries(sample).forEach(([id,value])=>{if($(id))$(id).value=value;});
- $("machineForm").requestSubmit();
+ showingSample=true;
+ try{$("machineForm").requestSubmit();}finally{showingSample=false;}
 });
 $("photos").addEventListener("change",e=>{photoUrls.forEach(URL.revokeObjectURL);photoUrls=Array.from(e.target.files||[]).slice(0,8).map(f=>URL.createObjectURL(f));$("preview").innerHTML=photoUrls.map(src=>'<img src="'+src+'" alt="Foto selecionada">').join("");});
 function esc(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
 $("machineForm").addEventListener("submit",e=>{
  e.preventDefault();
+ if(!showingSample){
+  document.getElementById("purchaseMessage").textContent="Para gerar o dossiê desta máquina, conclua a compra de R$ 19,90. A liberação ocorre após a confirmação do pagamento.";
+  document.getElementById("acesso").scrollIntoView({behavior:"smooth",block:"start"});
+  return;
+ }
  const d={kind:$("kind").value,brand:$("brand").value.trim(),model:$("model").value.trim(),year:$("year").value.trim(),hours:$("hours").value.trim(),price:$("price").value.trim(),location:$("location").value.trim(),link:$("link").value.trim(),seller:$("seller").value.trim(),docs:$("docs").value};
  const gaps=[];if(!d.brand)gaps.push("Marca não informada: confirme a identificação diretamente na plaqueta.");if(!d.model)gaps.push("Modelo não informado: solicite foto legível da plaqueta de identificação.");if(!d.year)gaps.push("Ano não informado: solicite documentação que comprove o ano/modelo.");if(!d.hours)gaps.push("Horímetro/quilometragem ausente: confira funcionamento, lacres e histórico.");if(!d.price)gaps.push("Preço não informado: compare com equipamentos equivalentes e estado de conservação.");if(d.docs==="Não informado"||d.docs==="Nenhum documento apresentado")gaps.push("Documentação pendente: solicite nota fiscal, origem, manuais e registros de manutenção.");
  const commonChecks=["Confira número de série/plaqueta no equipamento e compare com documentos e anúncio.","Peça histórico de manutenção, reparos relevantes e comprovação das horas/quilometragem.","Solicite teste de funcionamento acompanhado por profissional habilitado.","Confirme propriedade, origem, eventuais gravames e restrições nas fontes oficiais aplicáveis.","Registre por escrito acessórios incluídos, condições de entrega, garantias e responsabilidades."];
@@ -241,4 +277,5 @@ $("helpSearch").addEventListener("input",()=>{
  $("helpEmpty").hidden=visible!==0;
 });
 </script>
+<script src="paid-client.js" defer></script>
 </body></html>
