@@ -46,10 +46,21 @@
 .price-note{font-size:11px!important;color:#9eafbc!important}
 .price-side .btn{width:100%;justify-content:center;margin-top:8px}
 @media(max-width:700px){.price-card{grid-template-columns:1fr}.price-side{text-align:left}.price-side .btn{justify-content:center}}
+
+/* Central de ajuda no próprio site */
+.help-search{width:100%;padding:13px 15px;background:#0b1622;color:var(--text);border:1px solid #40566b;border-radius:10px;margin:8px 0 18px}
+.help-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.help-item{background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:16px}
+.help-item summary{cursor:pointer;font-weight:700;font-size:14px}
+.help-item p{font-size:13px;color:#b8c7d2;margin:12px 0 0}
+.help-item a{color:var(--green)}
+.help-links{display:flex;gap:12px;flex-wrap:wrap;margin-top:20px}
+@media(max-width:700px){.help-grid{grid-template-columns:1fr}}
+@media print{#ajuda,.help-nav{display:none!important}}
 </style>
 </head>
 <body>
-<header class="wrap nav"><div class="brand"><div class="mark">M</div><div>máquina clara<small>análise inteligente de máquinas</small></div></div><div class="navright"><span class="pill">VERSÃO DEMONSTRAÇÃO</span><a href="#avaliar" class="btn primary" style="padding:10px 15px;font-size:12px">Criar dossiê ↗</a></div></header>
+<header class="wrap nav"><div class="brand"><div class="mark">M</div><div>máquina clara<small>análise inteligente de máquinas</small></div></div><div class="navright"><a class="btn secondary help-nav" href="#ajuda" style="padding:10px 12px;font-size:12px">Ajuda</a><span class="pill">VERSÃO DEMONSTRAÇÃO</span><a href="#avaliar" class="btn primary" style="padding:10px 15px;font-size:12px">Criar dossiê ↗</a></div></header>
 <main>
 <section class="wrap hero"><div><div class="eyebrow">DECISÃO MAIS INFORMADA. MENOS SURPRESAS.</div><h1>Antes de comprar uma máquina, <span>enxergue além do anúncio.</span></h1><p>Organize dados, fotos e documentos em um dossiê preliminar. Saiba o que perguntar sobre motor, hidráulico, horímetro e documentação antes de negociar.</p><div class="actions"><a class="btn primary" href="#avaliar">Analisar uma máquina <span>→</span></a><a class="btn secondary" href="#como-funciona">Como funciona</a></div><p class="disclaimer" style="margin-top:20px">Ferramenta de organização e triagem. Não substitui vistoria mecânica, perícia, consulta documental oficial ou avaliação profissional.</p></div>
 <div class="hero-card"><div class="mocktop"><span>EXEMPLO DE EQUIPAMENTO</span><span>MODELO VISUAL</span></div><div class="tractor-art"><img src="https://images.unsplash.com/photo-1666011865321-20bc7e358121?auto=format&amp;fit=crop&amp;fm=jpg&amp;ixid=NHwxMjA3fDA%3D&amp;ixlib=rb-4.1.0&amp;q=60&amp;w=1400" alt="Trator New Holland real trabalhando em um campo agrícola" loading="eager"></div><div class="mocktitle">Trator New Holland em campo</div><div class="mocksub">Fotografia ilustrativa · imagem de referência, não representa o equipamento anunciado</div><div class="mockstats"><div class="stat"><b>01</b><small>IDENTIFICAÇÃO</small></div><div class="stat"><b>02</b><small>DOCUMENTOS</small></div><div class="stat"><b>03</b><small>INSPEÇÃO</small></div></div><div class="check"><i class="dot good"></i> Marca, modelo e ano</div><div class="check"><i class="dot"></i> Histórico de manutenção</div><div class="check"><i class="dot"></i> Número de série e plaqueta</div><div class="check"><i class="dot good"></i> Fotos e documentos</div></div></section>
@@ -108,6 +119,27 @@ navegador e não são enviados a um servidor. Não inclua CPF, dados bancários 
 <div class="panel"><h3>2. Resultado da análise</h3><p class="sub">Seu relatório será montado a partir dos dados preenchidos.</p><div id="empty" class="result-empty"><div class="big">▤</div><b>Seu dossiê aparecerá aqui</b><p>Preencha os dados ao lado e clique em “Gerar meu dossiê”.</p></div><div class="report" id="report"></div></div></div>
 </section>
 <section class="wrap section" id="como-funciona"><div class="sectionhead"><div class="eyebrow">SIMPLES E OBJETIVO</div><h2>Uma compra melhor começa com as perguntas certas.</h2></div><div class="features"><div class="feature"><div class="ico">📋</div><h3>Informações organizadas</h3><p>Reúna características, preço, localização, anúncio e documentos em um registro único.</p></div><div class="feature"><div class="ico">🔎</div><h3>Pontos de atenção</h3><p>Receba uma lista preliminar de verificações para orientar sua conversa com o vendedor e a vistoria.</p></div><div class="feature"><div class="ico">📄</div><h3>Dossiê imprimível</h3><p>Gere um documento organizado para compartilhar com um mecânico, avaliador ou parceiro.</p></div></div></section>
+
+<section class="wrap section" id="ajuda" aria-labelledby="help-title">
+ <div class="sectionhead"><div class="eyebrow">RESOLVA AQUI NO SITE</div><h2 id="help-title">Central de ajuda Máquina Clara</h2><p>Encontre orientações para usar o dossiê, salvar o relatório e entender o pagamento.</p></div>
+ <label for="helpSearch">Qual é sua dúvida?</label>
+ <input class="help-search" id="helpSearch" type="search" placeholder="Busque por PDF, fotos, pagamento, acesso..." autocomplete="off">
+ <p id="helpCount" class="sub" aria-live="polite"></p>
+ <div class="help-grid" id="helpItems">
+ <details class="help-item"><summary>Como gerar meu dossiê?</summary><p>Escolha o tipo de equipamento e preencha os dados que conhecer. Clique em “Gerar meu dossiê preliminar”. Para conhecer o resultado sem preencher, use “Ver exemplo preenchido”. Os dados desse exemplo são fictícios.</p><p><a href="#avaliar">Ir para o formulário</a></p></details>
+ <details class="help-item"><summary>Preciso preencher todos os campos?</summary><p>O tipo de equipamento é obrigatório. Os outros campos podem ficar em branco; o relatório indica o que falta confirmar. Mais informações preenchidas não comprovam a qualidade mecânica da máquina.</p></details>
+ <details class="help-item"><summary>Como salvar em PDF ou imprimir?</summary><p>Gere o dossiê e clique em “Imprimir / salvar PDF” no resultado. Na janela do navegador, selecione “Salvar como PDF” ou sua impressora. Salve o arquivo antes de fechar ou atualizar a página.</p></details>
+ <details class="help-item"><summary>As fotos e os dados ficam salvos?</summary><p>Nesta demonstração, os dados e as fotos são usados apenas na sessão do navegador. Não há armazenamento na sua conta nem recuperação automática após fechar ou atualizar a página. O relatório informa a quantidade de fotos; não faz diagnóstico visual das imagens.</p></details>
+ <details class="help-item"><summary>O relatório comprova o estado da máquina?</summary><p>Não. É uma organização preliminar dos dados declarados e um roteiro de verificações. Não autentica documentos, não consulta bases oficiais, não calcula valor de mercado e não substitui vistoria de um profissional.</p></details>
+ <details class="help-item"><summary>Quanto custa? Já posso comprar?</summary><p>O valor previsto é R$ 19,90 por dossiê, em pagamento único. A demonstração continua gratuita. O checkout Kiwify está em configuração e a compra pelo site será disponibilizada após os testes de confirmação e entrega.</p></details>
+ <details class="help-item"><summary>Paguei, mas ainda não recebi acesso. O que fazer?</summary><p>Confira se recebeu a confirmação de pagamento da Kiwify e verifique a pasta de spam. Gerar um Pix ou boleto não significa pagamento aprovado. A liberação automática da Máquina Clara ainda está em preparação; não faça uma nova compra para tentar liberar o mesmo pedido.</p><p>Para consultar orientações sobre a compra, acesse a <a href="https://ajuda.kiwify.com.br/" target="_blank" rel="noopener noreferrer">central oficial da Kiwify</a>.</p></details>
+ <details class="help-item"><summary>Como solicitar reembolso de uma compra Kiwify?</summary><p>Use o portal oficial de reembolso e informe o e-mail utilizado na compra. A Kiwify informa as condições e os prazos aplicáveis ao seu pedido.</p><p><a href="https://reembolso.kiwify.com.br/" target="_blank" rel="noopener noreferrer">Abrir portal de reembolso da Kiwify</a> · <a href="https://ajuda.kiwify.com.br/pt-br/article/como-faco-para-pedir-o-reembolso-de-um-produto-que-comprei-1kfom3h/" target="_blank" rel="noopener noreferrer">Ver instruções oficiais</a></p></details>
+ <details class="help-item"><summary>O botão de gerar não responde. Como resolver?</summary><p>Selecione o tipo de equipamento e confira se o link do anúncio começa com https:// ou deixe esse campo vazio. Use um navegador atualizado com JavaScript habilitado. Antes de atualizar a página, copie os dados preenchidos para não perdê-los.</p></details>
+ <details class="help-item"><summary>Como usar o checklist de inspeção?</summary><p>No resultado, marque cada item somente depois de conferir presencialmente. O contador acompanha o seu preenchimento; marcar os itens não é uma certificação. Salve o relatório em PDF para levar a um mecânico ou avaliador.</p></details>
+ </div>
+ <p id="helpEmpty" class="note" hidden>Nenhuma resposta encontrada. Tente palavras como “PDF”, “fotos”, “pagamento” ou “dossiê”.</p>
+ <div class="help-links"><a class="btn primary" href="#avaliar">Voltar ao dossiê →</a><a class="btn secondary" href="#precos">Ver preço planejado</a></div>
+</section>
 </main>
 <footer class="wrap footer"><div><b style="color:var(--text)">Máquina Clara IA</b><br>Informação organizada para decisões melhores.</div><div class="disclaimer">Versão inicial demonstrativa. O relatório é gerado por regras locais e dados fornecidos pelo usuário; não realiza consulta automática a bases oficiais, não autentica documentos e não executa diagnóstico mecânico por IA.</div><div>© <span id="yearNow"></span> Máquina Clara IA</div></footer>
 <script>
@@ -152,5 +184,15 @@ $("machineForm").addEventListener("submit",e=>{
  $("report").scrollIntoView({behavior:"smooth",block:"start"});
 });
 function copyReport(){const text=$("report").innerText;navigator.clipboard?.writeText(text).then(()=>alert("Resumo copiado." )).catch(()=>alert("Não foi possível copiar automaticamente. Use a opção Imprimir / salvar PDF."));}
+
+const normalizeHelp=text=>text.normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase();
+$("helpSearch").addEventListener("input",()=>{
+ const query=normalizeHelp($("helpSearch").value.trim());
+ const items=[...document.querySelectorAll("#helpItems details")];
+ let visible=0;
+ items.forEach(item=>{const match=normalizeHelp(item.textContent).includes(query);item.hidden=!match;if(match)visible++;item.open=Boolean(query&&match);});
+ $("helpCount").textContent=query?visible+" resposta(s) encontrada(s)":"";
+ $("helpEmpty").hidden=visible!==0;
+});
 </script>
 </body></html>
