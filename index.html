@@ -69,6 +69,7 @@
 </section>
 <section class="wrap section" id="avaliar"><div class="sectionhead"><div class="eyebrow">FERRAMENTA GRATUITA · DEMONSTRAÇÃO</div><h2>Monte seu primeiro dossiê</h2><p>Preencha o que souber. Campos desconhecidos podem ficar em branco.</p></div>
 <div class="workspace"><div class="panel formpanel"><h3>1. Dados do equipamento</h3><p class="sub">Informações fornecidas por você ou copiadas do anúncio.</p>
+<button class="btn secondary" id="demoFill" type="button" style="width:100%;margin:0 0 16px">▶ Ver exemplo preenchido (demonstração)</button>
 <form id="machineForm">
 <div class="field"><label for="kind">Tipo de equipamento *</label><select id="kind" required><option value="">Selecione</option><option>Trator agrícola</option><option>Colheitadeira</option><option>Escavadeira</option><option>Pá carregadeira</option><option>Retroescavadeira</option><option>Caminhão</option><option>Empilhadeira</option><option>Bomba ou motor</option><option>Compressor</option><option>Gerador</option><option>Roçadeira</option><option>Torno</option><option>Outro equipamento</option></select></div>
 <div class="two"><div class="field"><label for="brand">Marca</label><input id="brand" placeholder="Ex.: Caterpillar"></div><div class="field"><label for="model">Modelo</label><input id="model" placeholder="Ex.: 320D"></div></div>
@@ -113,6 +114,12 @@ navegador e não são enviados a um servidor. Não inclua CPF, dados bancários 
 const $=id=>document.getElementById(id);
 let photoUrls=[];
 $("yearNow").textContent=new Date().getFullYear();
+
+$("demoFill").addEventListener("click",()=>{
+ const sample={kind:"Trator agrícola",brand:"New Holland",model:"TL75E (exemplo)",year:"2017",hours:"6.500 horas (informado no exemplo)",price:"145000",location:"Ribeirão Preto / SP (exemplo)",link:"",seller:"DEMONSTRAÇÃO: dados fictícios usados apenas para mostrar como o dossiê funciona. Confirme todas as informações com o vendedor e documentos originais.",docs:"Nota fiscal, manual e histórico"};
+ Object.entries(sample).forEach(([id,value])=>{if($(id))$(id).value=value;});
+ $("machineForm").requestSubmit();
+});
 $("photos").addEventListener("change",e=>{photoUrls.forEach(URL.revokeObjectURL);photoUrls=Array.from(e.target.files||[]).slice(0,8).map(f=>URL.createObjectURL(f));$("preview").innerHTML=photoUrls.map(src=>'<img src="'+src+'" alt="Foto selecionada">').join("");});
 function esc(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
 $("machineForm").addEventListener("submit",e=>{
