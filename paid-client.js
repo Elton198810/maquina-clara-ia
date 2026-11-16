@@ -50,6 +50,11 @@ byId("buyDossier").addEventListener("click",async()=>{
  }catch(error){setMessage(error.message);byId("buyDossier").disabled=!canSell;}
 });
 byId("refreshPurchase").addEventListener("click",checkStatus);
+byId("startNewPurchase").addEventListener("click",()=>{
+ session=null;try{localStorage.removeItem("mc-purchase");}catch{}
+ byId("paidReport").hidden=true;byId("paidReport").innerHTML="";byId("bindPurchase").hidden=true;
+ setMessage("Pronto para um novo dossiê. Pedidos anteriores continuam disponíveis pela opção Recuperar meu pedido.");
+});
 byId("bindPurchase").addEventListener("click",async()=>{
  if(!session||!byId("machineForm").reportValidity())return;
  if(!byId("purchaseConsent").checked){setMessage("Autorize salvar os dados desta máquina antes de vincular o dossiê.");byId("purchaseConsent").focus();return;}
