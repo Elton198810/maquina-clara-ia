@@ -20,7 +20,7 @@ export function parseEvent(body) {
  // Kiwify values are integer centavos, never a float in reais.
  if(pair[1]==="approved" && Number(body.Commissions?.charge_amount)!==PRICE_CENTS) return null;
  const source=body.TrackingParameters?.src;
- return {providerId:body.order_id.toLowerCase(),type:body.webhook_event_type,status:pair[1],email:body.Customer.email.trim().toLowerCase(),source:typeof source==="string"&&/^[a-f0-9-]{36}$/i.test(source)?source.toLowerCase():null};
+ return {providerId:body.order_id.toLowerCase(),providerRef:typeof body.order_ref==="string"&&/^[a-z0-9_-]{3,64}$/i.test(body.order_ref)?body.order_ref:null,type:body.webhook_event_type,status:pair[1],email:body.Customer.email.trim().toLowerCase(),source:typeof source==="string"&&/^[a-f0-9-]{36}$/i.test(source)?source.toLowerCase():null};
 }
 export function nextState(current,incoming) {
  if(current==="charged_back")return current;
