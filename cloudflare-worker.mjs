@@ -31,12 +31,12 @@ async function webhook(request,env,url){
   query(env,`INSERT OR IGNORE INTO mc_orders(id,token_hash,email_hash,provider_id,status)
     SELECT COALESCE((SELECT id FROM mc_orders WHERE id=? AND email_hash=? AND (provider_id IS NULL OR provider_id=?)),?),?,?,?,'pending'
     WHERE EXISTS(SELECT 1 FROM mc_events WHERE attempt_id=?) AND NOT EXISTS(SELECT 1 FROM mc_orders WHERE provider_id=?)`,source,email,e.providerId,orphanId,hashToken(makeToken()),email,e.providerId,attempt,e.providerId),
-  query(env,`UPDATE mc_orders SET provider_id=?,updated_at=CURRENT_TIMESTAMP,
+  query(env,`UPDATE mc_orders SET provider_id=?,provider_ref=COALESCE(?,provider_ref),updated_at=CURRENT_TIMESTAMP,
     status=CASE WHEN status='charged_back' THEN status WHEN ?='charged_back' THEN 'charged_back'
     WHEN status='refunded' THEN status WHEN ?='refunded' THEN 'refunded'
     WHEN status='approved' AND ? IN ('pending','rejected') THEN status ELSE ? END
     WHERE email_hash=? AND (provider_id=? OR (id=? AND provider_id IS NULL))
-    AND EXISTS(SELECT 1 FROM mc_events WHERE attempt_id=?)`,e.providerId,e.status,e.status,e.status,e.status,email,e.providerId,source,attempt)
+    AND EXISTS(SELECT 1 FROM mc_events WHERE attempt_id=?)`,e.providerId,e.providerRef,e.status,e.status,e.status,e.status,email,e.providerId,source,attempt)
  ]);
  return reply(env,{received:true});
 }
@@ -69,9 +69,9 @@ export default {
     return reply(env,{id,token,checkoutUrl:checkout.href,amount:19.9},201);
    }
    if(path==="/recover"){
-    if(!uuid(data.providerId)||!validEmail(data.email))return reply(env,{error:"Informe o número completo do pedido e o e-mail da compra."},400);
+    if(typeof data.providerId!=="string"||!/^[a-z0-9_-]{3,64}$/i.test(data.providerId)||!validEmail(data.email))return reply(env,{error:"Informe o número completo do pedido e o e-mail da compra."},400);
     const token=makeToken();
-    const result=await query(env,"UPDATE mc_orders SET token_hash=?,updated_at=CURRENT_TIMESTAMP WHERE provider_id=? AND email_hash=? RETURNING id,status,machine",hashToken(token),data.providerId.toLowerCase(),emailKey(data.email,env.ORDER_HASH_SECRET)).first();
+    const result=await query(env,"UPDATE mc_orders SET token_hash=?,updated_at=CURRENT_TIMESTAMP WHERE (provider_id=? OR provider_ref=?) AND email_hash=? RETURNING id,status,machine",hashToken(token),data.providerId.toLowerCase(),data.providerId,emailKey(data.email,env.ORDER_HASH_SECRET)).first();
     if(!result)return reply(env,{error:"Pedido não encontrado. Confira o número, o e-mail e a confirmação de pagamento."},404);
     return reply(env,{id:result.id,token,status:result.status,needsMachine:!result.machine});
    }
