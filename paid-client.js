@@ -1,6 +1,6 @@
 (() => {
 "use strict";
-const API="https://maquina-clara-pagamentos.onrender.com/api/kiwify";
+const API="https://maquina-clara-pagamentos.eltondrone4.workers.dev/api/kiwify";
 const byId=id=>document.getElementById(id);
 const escape=value=>String(value??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const machine=()=>Object.fromEntries(["kind","brand","model","year","hours","price","location","link","seller","docs"].map(id=>[id,byId(id)?.value||""]));
