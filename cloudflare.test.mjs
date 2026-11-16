@@ -26,7 +26,7 @@ test("D1: compra, assinatura, acesso, recuperação e reembolso sem cobrança",a
  assert.equal(new URL(purchase.checkoutUrl).searchParams.get("src"),purchase.id);
  const session={id:purchase.id,token:purchase.token};
  const status=async()=>{const result=await req("/status",session);assert.equal(result.status,200);return result.json();};
- const event={order_id:providerId,order_status:"paid",webhook_event_type:"order_approved",Product:{product_id:PRODUCT_ID},Customer:{email:"fixture@example.invalid"},Commissions:{charge_amount:1990},TrackingParameters:{src:purchase.id}};
+ const event={order_id:providerId,order_ref:"TESTREF123",order_status:"paid",webhook_event_type:"order_approved",Product:{product_id:PRODUCT_ID},Customer:{email:"fixture@example.invalid"},Commissions:{charge_amount:1990},TrackingParameters:{src:purchase.id}};
  assert.equal((await status()).status,"pending");
  assert.equal((await req("/webhook",event)).status,401);
  await notify({...event,Product:{product_id:"rural"}});assert.equal((await status()).status,"pending");
@@ -35,7 +35,7 @@ test("D1: compra, assinatura, acesso, recuperação e reembolso sem cobrança",a
  assert.equal((await status()).report.machine.model,"Fictício");
  await notify(event);
  assert.equal(sqlite.prepare("SELECT count(*) AS n FROM mc_events WHERE provider_id=?").get(providerId).n,1);
- const recovered=await (await req("/recover",{providerId,email:"fixture@example.invalid"})).json();
+ const recovered=await (await req("/recover",{providerId:"TESTREF123",email:"fixture@example.invalid"})).json();
  assert.equal((await req("/status",session)).status,404);
  session.token=recovered.token;
  assert.equal((await status()).status,"approved");
