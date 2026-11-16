@@ -101,12 +101,24 @@ html{scroll-padding-top:24px}
 #paidReport h3{font:800 26px Manrope;margin:10px 0}#paidReport h4{font:700 17px Manrope;margin:24px 0 10px}#paidReport ul{padding-left:22px;color:#c5d1db}#paidReport li{margin:9px 0}.btn:disabled{cursor:not-allowed;opacity:.55;transform:none}
 [hidden]{display:none!important}
 @media print{#acesso{display:none!important}body.paid-print main>*:not(#acesso){display:none!important}body.paid-print #acesso{display:block!important}body.paid-print #acesso>*:not(#paidReport){display:none!important}body.paid-print #paidReport{display:block!important;color:#111}body.paid-print #printPaid{display:none!important}body.paid-print #paidReport ul{color:#222}}
+
+/* Apresentação comercial refinada: não altera formulários nem integração de pagamento */
+.hero{position:relative;padding-top:86px;padding-bottom:76px;gap:58px}
+.hero:before{content:"";position:absolute;z-index:-1;inset:10px -18px 5px;background:radial-gradient(ellipse at 70% 35%,rgba(184,239,101,.11),transparent 54%);pointer-events:none}
+.hero h1{font-size:clamp(40px,5.7vw,72px);letter-spacing:-3px;line-height:1.08;text-wrap:balance}
+.hero .eyebrow{display:inline-block;border:1px solid rgba(184,239,101,.35);background:rgba(184,239,101,.09);border-radius:100px;padding:10px 15px;letter-spacing:1.1px}
+.hero-card{box-shadow:0 28px 80px rgba(0,0,0,.35),0 0 0 1px rgba(184,239,101,.18);overflow:hidden}
+.tractor-art{position:relative;overflow:hidden}
+.tractor-art img{width:100%;display:block;filter:contrast(1.12) saturate(1.16);transform:scale(1.035)}
+.tractor-art:after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(11,20,32,.42),transparent 55%);pointer-events:none}
+.hero .actions .primary{box-shadow:0 12px 30px rgba(184,239,101,.18);font-weight:800}
+@media(max-width:700px){.hero{padding-top:45px;padding-bottom:45px;gap:30px}.hero h1{letter-spacing:-1.8px}}
 </style>
 </head>
 <body>
 <header class="wrap nav"><div class="brand"><div class="mark">M</div><div>máquina clara<small>análise inteligente de máquinas</small></div></div><div class="navright"><a class="btn secondary help-nav" href="#ajuda" style="padding:10px 12px;font-size:12px">Ajuda</a><span class="pill"><span class="status-dot" aria-hidden="true"></span> EXEMPLO DISPONÍVEL</span><a href="#avaliar" class="btn primary" style="padding:10px 15px;font-size:12px">Criar dossiê ↗</a></div></header>
 <main>
-<section class="wrap hero"><div><div class="eyebrow">DECISÃO MAIS INFORMADA. MENOS SURPRESAS.</div><h1>Antes de comprar uma máquina, <span>enxergue além do anúncio.</span></h1><p>Organize dados, fotos e documentos em um dossiê preliminar. Saiba o que perguntar sobre motor, hidráulico, horímetro e documentação antes de negociar.</p><div class="actions"><a class="btn primary" href="#avaliar">Analisar uma máquina <span>→</span></a><a class="btn secondary" href="#como-funciona">Como funciona</a></div><p class="disclaimer" style="margin-top:20px">Ferramenta de organização e triagem. Não substitui vistoria mecânica, perícia, consulta documental oficial ou avaliação profissional.</p></div>
+<section class="wrap hero"><div><div class="eyebrow">DOSSIÊ DE COMPRA DE MÁQUINAS USADAS · R$ 19,90</div><h1>Máquina usada? <span>Compre com mais informação.</span></h1><p>Organize dados, fotos e documentos em um dossiê preliminar. Saiba o que perguntar sobre motor, hidráulico, horímetro e documentação antes de negociar.</p><div class="actions"><a class="btn primary" href="https://pay.kiwify.com.br/gD33lPM">Comprar dossiê · R$ 19,90 <span>→</span></a><a class="btn secondary" href="#como-funciona">Como funciona</a></div><p class="disclaimer" style="margin-top:20px">Ferramenta de organização e triagem. Não substitui vistoria mecânica, perícia, consulta documental oficial ou avaliação profissional.</p></div>
 <div class="hero-card"><div class="mocktop"><span>EXEMPLO DE EQUIPAMENTO</span><span>MODELO VISUAL</span></div><div class="tractor-art"><img src="https://images.unsplash.com/photo-1666011865321-20bc7e358121?auto=format&amp;fit=crop&amp;fm=jpg&amp;ixid=NHwxMjA3fDA%3D&amp;ixlib=rb-4.1.0&amp;q=60&amp;w=1400" alt="Trator New Holland real trabalhando em um campo agrícola" loading="eager"></div><div class="mocktitle">Trator New Holland em campo</div><div class="mocksub">Fotografia ilustrativa · imagem de referência, não representa o equipamento anunciado</div><div class="mockstats"><div class="stat"><b>01</b><small>IDENTIFICAÇÃO</small></div><div class="stat"><b>02</b><small>DOCUMENTOS</small></div><div class="stat"><b>03</b><small>INSPEÇÃO</small></div></div><div class="check"><i class="dot good"></i> Marca, modelo e ano</div><div class="check"><i class="dot"></i> Histórico de manutenção</div><div class="check"><i class="dot"></i> Número de série e plaqueta</div><div class="check"><i class="dot good"></i> Fotos e documentos</div></div></section>
 
 <section class="wrap value-hook" aria-labelledby="value-title">
