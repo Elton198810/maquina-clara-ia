@@ -36,18 +36,8 @@ async function checkStatus(){
  }catch(error){setMessage(error.message);}
  finally{byId("refreshPurchase").disabled=false;}
 }
-byId("buyDossier").addEventListener("click",async()=>{
- if(!canSell)return;
- if(!byId("machineForm").reportValidity())return;
- if(!byId("purchaseForm").reportValidity())return;
- byId("buyDossier").disabled=true;setMessage("Preparando seu pedido. Aguarde...");
- try{
-  const result=await request("/checkout",{email:byId("purchaseEmail").value,consent:byId("purchaseConsent").checked,machine:machine()});
-  const url=new URL(result.checkoutUrl);
-  if(url.origin!=="https://pay.kiwify.com.br")throw Error("Não foi possível abrir o checkout.");
-  saveSession({id:result.id,token:result.token});
-  window.location.assign(url.href);
- }catch(error){setMessage(error.message);byId("buyDossier").disabled=!canSell;}
+byId("buyDossier").addEventListener("click",()=>{
+ window.location.assign("https://pay.kiwify.com.br/gD33lPM");
 });
 byId("refreshPurchase").addEventListener("click",checkStatus);
 byId("startNewPurchase")?.addEventListener("click",()=>{
@@ -68,11 +58,10 @@ byId("recoveryForm").addEventListener("submit",async event=>{
  }catch(error){setMessage(error.message);}
  finally{byId("recoverPurchase").disabled=false;}
 });
-fetch(API+"/config",{signal:AbortSignal.timeout(70000)}).then(r=>r.json()).then(config=>{
- canSell=config.enabled===true;
- byId("buyDossier").disabled=!canSell;
- byId("buyDossier").textContent=canSell?"Comprar dossiê por R$ 19,90 →":"Contratação em preparação";
- byId("salesAvailability").textContent=canSell?"Pagamento único pela Kiwify. A liberação depende da confirmação do pagamento.":"O dossiê custa R$ 19,90. As vendas estão em preparação; o exemplo fictício continua disponível.";
-}).catch(()=>{byId("salesAvailability").textContent="A contratação está indisponível no momento. Você pode conhecer o exemplo fictício.";});
+// O botão de compra abre diretamente o checkout Kiwify confirmado pelo proprietário.
+// A liberação automática do dossiê continua dependente da integração de pagamentos.
+byId("buyDossier").disabled=false;
+byId("buyDossier").textContent="Comprar por R$ 19,90 →";
+byId("salesAvailability").textContent="Pagamento realizado no checkout seguro da Kiwify. A liberação do dossiê depende da confirmação e da integração de acesso.";
 if(session)checkStatus();
 })();
